@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 import models
+from routers import auth, usuarios, historial, conversaciones, mensajes, diagnostico, pnl, chat
 
 # Crear tablas en la BD si no existen
 Base.metadata.create_all(bind=engine)
@@ -22,9 +23,9 @@ app.add_middleware(
 )
 
 # Registrar routers
-from routers import auth, usuarios, historial, conversaciones, mensajes, diagnostico, pnl
 
 app.include_router(auth.router)
+app.include_router(chat.router)
 app.include_router(usuarios.router)
 app.include_router(historial.router)
 app.include_router(conversaciones.router)
